@@ -227,9 +227,9 @@ impl Histogram {
         let mut sum: f64 = 0.0f64;
         for i in 0..K_NUM_BUCKETS {
             sum += self.buckets_[i];
-            if (sum >= threshold) {
+            if sum >= threshold {
                 // Scale linearly within this bucket
-                let left_point = if (i == 0) {
+                let left_point = if i == 0 {
                     0.0
                 } else {
                     Histogram::K_BUCKET_LIMIT[i - 1]
@@ -240,10 +240,10 @@ impl Histogram {
                 let right_sum: f64 = sum;
                 let pos: f64 = (threshold - left_sum) / (right_sum - left_sum);
                 let mut r: f64 = left_point + (right_point - left_point) * pos;
-                if (r < self.min_) {
+                if r < self.min_ {
                     r = self.min_;
                 }
-                if (r > self.max_) {
+                if r > self.max_ {
                     r = self.max_;
                 }
                 return r;
@@ -253,7 +253,7 @@ impl Histogram {
     }
 
     fn average(&self) -> f64 {
-        if (self.num_ == 0i32) {
+        if self.num_ == 0i32 {
             return 0.0;
         }
         self.sum_ / (self.num_ as f64)
@@ -271,7 +271,7 @@ impl Histogram {
     }
 
     pub fn standard_deviation(&self) -> f64 {
-        if (self.num_ == 0i32) {
+        if self.num_ == 0i32 {
             return 0.0;
         }
         let variance: f64 = (self.sum_squares_ * self.num_ as f64 - self.sum_ * self.sum_) / (self.num_ * self.num_) as f64;

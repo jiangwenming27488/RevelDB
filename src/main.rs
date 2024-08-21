@@ -3,6 +3,7 @@ use log::info;
 use log::LevelFilter;
 use env_logger;
 mod utils;
+mod tests;
 
 fn main() {
     env_logger::builder().filter_level(

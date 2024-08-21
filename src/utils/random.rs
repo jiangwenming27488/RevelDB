@@ -30,7 +30,7 @@ impl Random {
         // The first reduction may overflow by 1 bit, so we may need to
         // repeat.  mod == M is not possible; using > allows the faster
         // sign-bit-based test.
-        if (self.seed_ > M) {
+        if self.seed_ > M {
             self.seed_ -= M;
         }
         self.seed_
@@ -51,7 +51,8 @@ impl Random {
     // return "base" random bits.  The effect is to pick a number in the
     // range [0,2^max_log-1] with exponential bias towards smaller numbers.
     pub fn skewed(&mut self, max_log: u32) -> u32 {
-        self.uniform(1 << self.uniform(max_log + 1))
+        let val = self.uniform(max_log+1);
+        self.uniform(1 << val)
     }
 
 }

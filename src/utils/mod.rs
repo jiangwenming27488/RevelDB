@@ -1,4 +1,6 @@
 pub mod arena;
 
 pub mod histogram;
-mod random;
+pub mod random;
+pub mod hash;
+mod coding;
