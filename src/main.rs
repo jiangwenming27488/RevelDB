@@ -4,6 +4,7 @@ use log::LevelFilter;
 use env_logger;
 mod utils;
 mod tests;
+mod include;
 
 fn main() {
     env_logger::builder().filter_level(
